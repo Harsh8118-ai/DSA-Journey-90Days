@@ -4,3 +4,4 @@ bin/
 input.txt
 output.txt
 .vscode/
+run_debug.sh
