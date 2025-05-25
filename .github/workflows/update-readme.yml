@@ -1,0 +1,40 @@
+name: 🛠️ Auto-Update README Progress
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  update-readme:
+    if: github.actor != 'Harsh Bot'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository with PAT
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Run update script
+        run: python update_readme.py
+
+      - name: Commit & push changes
+        run: |
+          git config --global user.name "Harsh Bot"
+          git config --global user.email "bot@harsh.dev"
+          git add README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "🔄 auto: update progress in README"
+            git push origin HEAD:master
+          else
+            echo "No changes to commit."
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
