@@ -33,7 +33,7 @@ jobs:
           git add README.md
 
           if ! git diff --cached --quiet; then
-            git commit -m '🔄 auto: update progress in README'
+            git commit -m "auto: update progress in README"
             git push origin HEAD:master
           else
             echo "No changes to commit."
