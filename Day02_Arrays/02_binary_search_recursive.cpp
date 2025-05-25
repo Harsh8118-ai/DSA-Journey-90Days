@@ -18,10 +18,10 @@ int recursiveBinarySearch(int arr[], int size, int target, int low, int high)
 
     return -1;
 }
-
+ 
 int main()
 {
-    
+
     int array[] = {2, 3, 4, 5, 10};
     int size = sizeof(array) / sizeof(array[0]);
     int target;
